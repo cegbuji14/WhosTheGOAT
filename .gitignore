@@ -1,0 +1,26 @@
+# VS Code settings folder
+.vscode/
+
+# Build output folders (add your build folder names here if different)
+build/
+bin/
+
+# Object files
+*.o
+
+# Executables
+*.out
+*.exe
+
+# Debug files
+*.dSYM/
+
+# Mac system files
+.DS_Store
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp

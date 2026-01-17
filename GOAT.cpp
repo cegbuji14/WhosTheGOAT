@@ -212,19 +212,57 @@ double distance(const std::vector<double>& a, const std::vector<double>& b){//si
     return std::sqrt(sum);
 }
 
-void findBestMatch(const std::vector<double>& userAttr, const std::vector<Player>& players){
+void findBestMatch(const std::vector<double>& userAttr, const std::vector<Player>& players, ArchetypeFlags &archs){
     const Player* bestMatch = nullptr;
     double bestScore = std::numeric_limits<double>::max();
 
     for (auto& p : players) {
         double d = distance(userAttr, p.attributes);
+
+        //IN NODE VERSION WITH BIGGER PLAYER DATABASE WILL HAVE NUDGES FOR ALL 30 PLAYERS
+
+        /*if (archs.defenseFirst && (p.name == "Tim Duncan" || p.name == "Bill Russell")) {
+            d *= 0.95;  // 5% closer, small nudge
+        }*/ //Players like Kawhi Leonard, Duncan, Bill Russell, Hakeem Olajuwon, etc.
+
+        if ((archs.heliocentric && p.name == "LeBron James") || (archs.heliocentric && p.name == "Michael Jordan") || (archs.heliocentric && p.name == "Nikola Jokic")) {
+            d *= 0.93;  // 7% closer, another gentle nudge (Ball dominant superstars)
+        }
+        if ((archs.oneOnOneStyle && p.name == "Kobe Bryant") || (archs.oneOnOneStyle && p.name == "Kevin Durant")) {
+            d *= 0.95;  // 5% closer, small nudge 1on1 style players
+        }
+
+        if (archs.offenseFirst && p.name == "Stephen Curry" || archs.offenseFirst && p.name == "James Harden") {
+            d *= 0.93;  // 7% closer, another gentle nudge
+        }
+        /*if (archs.teamFirst && p.name == "Bill Russell"){
+            d *= 0.95;  // 5% closer, small nudge
+        }
+        if (archs.systemPlayer && p.name == "Time Duncan") {
+            d *= 0.93;  // 7% closer, another gentle nudge
+        }*/
+
+        std::cout << "\nComparing to " << p.name << "\n";
+
+        for (int i = 0; i < ATTRIBUTE_COUNT; i++) {
+            double diff = userAttr[i] - p.attributes[i];
+            std::cout << "  Attr " << i
+                    << " user=" << userAttr[i]
+                    << " player=" << p.attributes[i]
+                    << " diff=" << diff << "\n";
+        }
+
+std::cout << "  Distance: " << d << "\n";
+
         if (d < bestScore) {
             bestScore = d;
             bestMatch = &p;
         }
     }
     cout << "The player who best aligns with your view of our beloved ganme is: " << bestMatch->name << endl;
-    //cout more from archetype narrative
+    if (archs.context){
+        cout << "You are also somebody that thinks context is important when discussing the greatest. \n";
+    }
 
 }
 
@@ -312,7 +350,7 @@ void askQuestions(UserState& user){
     if (std::tolower(static_cast<unsigned char>(choice)) == 'a') {
         applyAttributeDelta(user.preference, clutch, 0.08);
         applyAttributeDelta(user.preference, intangibles, 0.0);
-        applyAttributeDelta(user.preference, playmaking, 0.08);
+        applyAttributeDelta(user.preference, playmaking, 0.1);
     }
     if (std::tolower(static_cast<unsigned char>(choice)) == 'b') {
         applyAttributeDelta(user.preference, clutch, 0.08);
@@ -769,10 +807,11 @@ int main(){
 
     mainMenu();
     askQuestions(user);
+    ArchetypeFlags user_archetypes = user.archetype;
     user.attribute = projectPreferences(user.preference.attr_vec);
 
     std::vector<Player> players = {m_jordan, k_bryant, s_curry, l_james, n_jokic};
-    findBestMatch(user.attribute, players);
+    findBestMatch(user.attribute, players, user_archetypes);
 
 }
  

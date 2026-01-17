@@ -8,22 +8,22 @@
             "name": "Debug GOAT.cpp",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/GOAT",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true,   // <-- Opens external terminal window
-            "preLaunchTask": "build GOAT.cpp",
-            "MIMode": "gdb",
+            "externalConsole": true, 
+            "console": "externalTerminal",
+            "preLaunchTask": "C/C++: clang++ build active file",
+            "MIMode": "lldb",
             "setupCommands": [
               {
-                "description": "Enable pretty-printing for gdb",
+                "description": "Enable pretty-printing for lldb",
                 "text": "-enable-pretty-printing",
                 "ignoreFailures": true
               }
             ],
-            "miDebuggerPath": "/usr/bin/gdb"
           }
         ]
       }
