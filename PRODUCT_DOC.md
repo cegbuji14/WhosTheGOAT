@@ -38,6 +38,6 @@ This program (c++) is compiled into a local executable file using clang++. The e
 -Will optimize filing style for Node.js version (Make header files and consolidate any code to make easier to read)
 -Add the other player Archetype flags + players, not just the test players in the current c++ program. Potentially tell the user about how they view the game using archetype flags.
 -Only 5 players currently, will use json for all players in Node.js
--Not an issue but will remove logs in future. Players with very high ratings may not be paired correctly if questions do not give enough chances for increments to be near when they are normalized.
+-Not an issue but will remove logs in future. Players with very high ratings may not be paired correctly if questions do not give enough chances for increments to be near when they are normalized. Also need to add cases for if user enters an invalid answer choice
 
 

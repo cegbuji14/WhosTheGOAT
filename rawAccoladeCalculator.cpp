@@ -2,7 +2,9 @@
 #include <string>
 using namespace std;
 
-// Linear tapering weight calculator
+//Program to give pool of players a relative score based on their accomplishments
+
+// Linear tapering weight calculator, essentially squeezes values within a smaller range while still allowing them to hold relative value
 double taperWeight(int n, int n_max, double w_start, double w_end) {
     if (n < 1 || n > n_max) return 0.0;
     return w_start - ((n - 1) * (w_start - w_end)) / (n_max - 1);

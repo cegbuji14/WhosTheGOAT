@@ -3,6 +3,7 @@
 #include <cmath>
 #include <vector>
 using namespace std;
+//Program to take raw score and make them out of 100
 
 double softCap(double x) {//used so the top accolade scores will still be about of 100 because raw scores like MJ & Kareem are way higher
     const double anchor  = 87.0;     // where compression begins
