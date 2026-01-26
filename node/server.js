@@ -4,6 +4,12 @@ import quizRouter from './routes/quiz.js';
 import { players } from './data/players.js';
 import { findBestMatch } from './routes/match.js';
 import { ATTRIBUTE_COUNT } from './data/attributes.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); // optional, remove if not needed
 app.use(express.json());
 app.use('/quiz', quizRouter);
+// Serve static files from 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.post('/match', (req, res) => {

@@ -6,22 +6,33 @@ const quizDiv = document.getElementById("quiz");
 const nextBtn = document.getElementById("nextBtn");
 
 async function loadQuestions() {
-  const res = await fetch("/quiz/questions");
-  const data = await res.json();
-  questions = data.questions;
-  renderQuestion();
+  try {
+    const res = await fetch("/quiz/questions");
+    const data = await res.json();
+    questions = data.QUESTIONS;
+    renderQuestion();
+  } catch (err) {
+    alert("Failed to load questions.");
+  }
 }
 
 function renderQuestion() {
   const q = questions[currentIndex];
   quizDiv.innerHTML = `<h3>${q.text}</h3>`;
 
-  q.options.forEach((opt, i) => {
+  Object.entries(q.options).forEach(([key, optionText]) => {
     const btn = document.createElement("button");
-    btn.textContent = opt;
+    btn.textContent = optionText;
+
     btn.onclick = () => {
-      answers[currentIndex] = i;
+      answers[currentIndex] = key;
+
+      Array.from(quizDiv.querySelectorAll("button")).forEach(b => {
+        b.style.backgroundColor = "";
+      });
+      btn.style.backgroundColor = "#d3d3d3";
     };
+
     quizDiv.appendChild(btn);
   });
 }
@@ -49,7 +60,7 @@ async function submitQuiz() {
   });
 
   const data = await res.json();
-  console.log("Preferences:", data.preferences);
+  // You can handle/display results here if you want
 }
 
 loadQuestions();
