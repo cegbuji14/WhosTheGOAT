@@ -1,4 +1,4 @@
-import { distance } from "./distance.js";
+import { distance } from "../logic/distance.js";
 
 export function findBestMatch(userAttr, players) {
   if (!players || players.length === 0) {

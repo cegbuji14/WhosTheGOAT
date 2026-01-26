@@ -1,5 +1,5 @@
-import { QUESTIONS } from './questions.js';
-import { ATTRIBUTES } from './attributes.js';
+import { QUESTIONS } from '../data/questions.js';
+import { ATTRIBUTES } from '../data/attributes.js';
 
 export function applyAnswersToPreferences(answers, user) {
   for (const question of QUESTIONS) {

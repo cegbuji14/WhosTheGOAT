@@ -1,5 +1,5 @@
 import { applyAnswersToPreferences } from './preferenceBuild.js';
-import { ATTRIBUTE_COUNT } from './attributes.js';
+import { ATTRIBUTE_COUNT } from './data/attributes.js';
 
 const user = {
   preferences: new Array(ATTRIBUTE_COUNT).fill(0),

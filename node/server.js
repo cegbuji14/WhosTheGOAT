@@ -1,9 +1,9 @@
 import express from 'express'; // assuming ES modules in package.json
 import cors from 'cors'; // optional, only if cross-origin requests are needed
-import quizRouter from './quiz.js';
-import { players } from './players.js';
-import { findBestMatch } from './match.js';
-import { ATTRIBUTE_COUNT } from './attributes.js';
+import quizRouter from './routes/quiz.js';
+import { players } from './data/players.js';
+import { findBestMatch } from './routes/match.js';
+import { ATTRIBUTE_COUNT } from './data/attributes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

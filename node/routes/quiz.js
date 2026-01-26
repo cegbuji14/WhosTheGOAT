@@ -1,9 +1,14 @@
 import express from 'express';
-import { applyAnswersToPreferences } from './preferenceBuild.js';
-import { ATTRIBUTE_COUNT } from './attributes.js';
+import { applyAnswersToPreferences } from '../logic/preferenceBuild.js';
+import { ATTRIBUTE_COUNT } from '../data/attributes.js';
+import {  QUESTIONS } from "../data/questions.js";
 
 const router = express.Router();
-
+//GET REQUEST 
+router.get("/questions", (req, res) => {
+  res.json({ QUESTIONS });
+});
+//POST REQUEST
 router.post('/submit-quiz', (req, res) => {
   console.log('Received /submit-quiz POST with body:', req.body);
   const { answers, user } = req.body;
