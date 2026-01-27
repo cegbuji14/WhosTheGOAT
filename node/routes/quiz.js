@@ -30,7 +30,10 @@ router.post('/submit-quiz', (req, res) => {
 try {
   applyAnswersToPreferences(answers, user);
   console.log("applyAnswersToPreferences called", answers, user);
-  const matchedPlayer = findBestMatch(user.preferences, players);
+  const scaledPreferences = user.preferences.map(p => p * 100);
+  const matchedPlayer = findBestMatch(scaledPreferences, players);
+  
+  //const matchedPlayer = findBestMatch(user.preferences, players);
   console.log("Matched player chosen:", matchedPlayer);
   if (!matchedPlayer) {
     return res.status(500).json({ error: "No matching player found" });
