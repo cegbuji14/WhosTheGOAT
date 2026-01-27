@@ -2,8 +2,9 @@ import { QUESTIONS } from '../data/questions.js';
 import { ATTRIBUTES } from '../data/attributes.js';
 
 export function applyAnswersToPreferences(answers, user) {
-  for (const question of QUESTIONS) {
-    const answer = answers[question.id]?.toLowerCase();
+  for (let i = 0; i < QUESTIONS.length; i++) {
+    const question = QUESTIONS[i];
+    const answer = answers[i]?.toLowerCase();
     if (!answer) continue;
 
     const effect = question.effects[answer];
@@ -15,7 +16,6 @@ export function applyAnswersToPreferences(answers, user) {
           user.archetype[archKey] = (user.archetype[archKey] || 0) + value;
         }
       } else if (key === '__NARRATIVE_TAGS__') {
-        // Ignore narrative tags
         continue;
       } else {
         const index = ATTRIBUTES[key];
@@ -29,4 +29,5 @@ export function applyAnswersToPreferences(answers, user) {
     }
   }
 }
+
 
