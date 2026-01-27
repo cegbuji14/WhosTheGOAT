@@ -4,6 +4,7 @@ let answers = [];
 
 const quizDiv = document.getElementById("quiz");
 const nextBtn = document.getElementById("nextBtn");
+nextBtn.disabled = true;
 
 async function loadQuestions() {
   try {
@@ -17,6 +18,7 @@ async function loadQuestions() {
 }
 
 function renderQuestion() {
+  nextBtn.disabled = true;
   const q = questions[currentIndex];
   quizDiv.innerHTML = `<h3>${q.text}</h3>`;
 
@@ -31,6 +33,7 @@ function renderQuestion() {
         b.style.backgroundColor = "";
       });
       btn.style.backgroundColor = "#d3d3d3";
+      nextBtn.disabled = false; // ✅ enables Next button
     };
 
     quizDiv.appendChild(btn);
@@ -38,11 +41,12 @@ function renderQuestion() {
 }
 
 nextBtn.onclick = () => {
+  /*
   if (answers[currentIndex] == null) {
     alert("Select an answer first");
     return;
-  }
-
+  } //Not needed anymore after disabling next button when no questions left
+*/
   currentIndex++;
 
   if (currentIndex < questions.length) {
