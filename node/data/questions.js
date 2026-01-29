@@ -1,3 +1,5 @@
+//App questions with answer choices affecting user's preferences and archetypes
+
 export const QUESTIONS = [
     {
       id: "roles_philosophy",

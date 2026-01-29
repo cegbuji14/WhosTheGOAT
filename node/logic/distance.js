@@ -17,10 +17,10 @@ export function distance(a, b) {
           `Invalid value at index ${i}:`,
           a[i],
           b[i]
-        );
+        );//First checks that both values are actually numbers if not...
         return NaN;
       }
-      sum += (a[i] - b[i]) ** 2;
+      sum += (a[i] - b[i]) ** 2;//Euclidean distance begins. Similar to pythagorean theorem.
     }
   
     return Math.sqrt(sum);

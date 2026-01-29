@@ -21,7 +21,8 @@ function zeroCenterPlayerAttributes(players) {
     const adjustedAttrs = player.attributes.map(attr => attr - avg);
     return { ...player, attributes: adjustedAttrs };
   });
-}
+}//zero centered players to make comparisons for players with high ratings be less biased
+
 const adjustedPlayers = zeroCenterPlayerAttributes(players);
 
 //POST REQUEST
@@ -34,7 +35,7 @@ router.post('/submit-quiz', (req, res) => {
     return res.status(400).json({ error: 'Invalid or missing answers' });
   }
 
-  // ✅ create user server-side
+  // create user on server-side
   const user = {
     preferences: new Array(ATTRIBUTE_COUNT).fill(0),
     archetype: {}

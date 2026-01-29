@@ -1,3 +1,5 @@
+//Default pool of players. Attributes array follows same format as attributes object/enum array 
+
 export const players = [
     {
       name: "Michael Jordan",

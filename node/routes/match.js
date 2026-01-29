@@ -1,5 +1,7 @@
 import { distance } from "../logic/distance.js";
 
+//MATCH LOGIC FOR WHEN ONLY RETURNING #1 MATCH AND NOT TOP 3
+
 export function findBestMatch(userAttr, players) {
   if (!players || players.length === 0) {
     console.error("No players passed to matcher");
@@ -39,6 +41,6 @@ export function findTopMatches(userAttr, players, count = 3) {
     .filter(p => !Number.isNaN(p.distance))
     .sort((a, b) => a.distance - b.distance)
     .slice(0, count);
-}
+}//returns top 3 players
 
   

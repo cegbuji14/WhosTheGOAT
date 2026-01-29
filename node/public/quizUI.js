@@ -49,10 +49,10 @@ function renderQuestion() {
       });
 
       btn.style.backgroundColor = "#d3d3d3";
-      nextBtn.disabled = false; // Enable Next button
+      nextBtn.disabled = false; // Enables next button
     };
 
-    // If already answered, highlight selected
+    // If already answered, highlight it
     if (answers[currentIndex] === key) {
       btn.style.backgroundColor = "#d3d3d3";
       nextBtn.disabled = false;
@@ -74,7 +74,7 @@ nextBtn.onclick = () => {
   }
 
   currentIndex++;
-  renderQuestion();
+  renderQuestion();//goes through quiz until last questions then submits quiz
 };
 
 backBtn.onclick = () => {
@@ -113,11 +113,11 @@ function showResults(matches, archetype) {
   document.getElementById("quiz-container").style.display = "none";
   resultsDiv.style.display = "block";
 
-  const mainMatch = matches[0];
+  const mainMatch = matches[0];//#1 match in array of matches
   const others = matches
     .slice(1)
     .map(p => `<li>${p.name}</li>`)
-    .join("");
+    .join("");//array of other matches ignoring first match (main)
 
   resultsDiv.innerHTML = `
     <h1>Your GOAT...</h1>
@@ -138,7 +138,7 @@ function resetQuiz() {
   const resultsDiv = document.getElementById("results");
   resultsDiv.style.display = "none";
 
-  // Reset UI elements
+  // Resets UI elements
   quizDiv.style.display = "block";
   document.getElementById("quiz-container").style.display = "block";
   nextBtn.style.display = "inline-block";
@@ -169,7 +169,7 @@ function formatArchetype(archetype) {
         case "context": return "Context-Aware";
         default: return key;
       }
-    })
+    })//gives names based on archetypes
     .join(" • ");
 }
 

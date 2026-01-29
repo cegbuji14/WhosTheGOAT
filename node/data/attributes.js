@@ -1,3 +1,5 @@
+//Player attribute categories. Players are scored between 0-100 in each category
+
 export const ATTRIBUTES = Object.freeze({
     SCORING_OUTPUT: 0,
     SHOT_CREATION: 1,
