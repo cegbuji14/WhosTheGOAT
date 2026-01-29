@@ -48,17 +48,21 @@ function renderQuestion() {
 }
 
 nextBtn.onclick = () => {
-  // last question → submit
+  if (answers[currentIndex] == null) {
+    alert("Select an answer first");
+    return;
+  }
+
   if (currentIndex === questions.length - 1) {
     submitQuiz();
     return;
   }
-  currentIndex++;
 
-  if (currentIndex < questions.length) {
-    renderQuestion();
-  } else {
-    submitQuiz();
+  currentIndex++;
+  renderQuestion();
+
+  if (currentIndex === questions.length - 1) {
+    nextBtn.textContent = "Finish";
   }
 };
 
@@ -74,7 +78,13 @@ async function submitQuiz() {
 
   const data = await res.json();
 
-  console.log("Matched player:", data);//test
+  if (!data.success) {
+    quizDiv.innerHTML = "<p>Something went wrong.</p>";
+    return;
+  }
+  
+  showResults(data.player, data.archetype);
+  /*console.log("Matched player:", data);//test
   //handle/display results here
   if (data.player) {
     quizDiv.innerHTML = `
@@ -84,6 +94,40 @@ async function submitQuiz() {
   } else {
     quizDiv.innerHTML = "<h2>No match found.</h2>";
   }
+  */
+}
+function showResults(player, archetype) {
+  const resultsDiv = document.getElementById("results");
+
+  quizDiv.style.display = "none";
+  resultsDiv.style.display = "block";
+
+  const archetypeText = Object.entries(archetype)
+    .map(([key, value]) => `${key} (${value})`)
+    .join(", ");
+
+  resultsDiv.innerHTML = `
+    <h1>Your Match</h1>
+    <h2>${player.name}</h2>
+
+    <p><strong>Archetype:</strong> ${archetypeText || "Balanced"}</p>
+
+    <button id="retakeBtn">Retake Quiz</button>
+  `;
+
+  document.getElementById("retakeBtn").onclick = resetQuiz;
+}
+
+function resetQuiz() {
+  currentIndex = 0;
+  answers = [];
+
+  document.getElementById("results").style.display = "none";
+  quizDiv.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  nextBtn.textContent = "Next";
+
+  renderQuestion();
 }
 
 loadQuestions();
