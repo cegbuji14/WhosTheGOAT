@@ -16,28 +16,31 @@ Feature 3: Compares distance from user's attribute/archetype preferences turned 
 The app is currently for NBA fans. In the future it could be used for other sports fans or for any field where people can make cases in favor of someone who is not as highly decorated.
 
 4. Technology Stack
-C++17, VSCode, clang++, lldb, macOS, git and github
+C++17, Node.js, Express.js, Fetch API, Vanilla HTML, CSS, clang++, lldb, macOS, git and github
 
 5. User Flow
--User launches app.
--Greeted by main menu screen
+-User launches app
 -Answers questionaire
 -Receives player comparisons
 
 6. Future Enhancements
--Node.js implementation
 -More weighted questions 
 -Access to NBA stats that allow for more accurate numbers and weighted questions.
--Much larger player database to choose from (30 players minimum in Node version for much larger pool)
+-Much larger player database to choose from (30 players minimum in Node version for larger pool than C++)
 
 
 7. Deployment and Hosting
 This program (c++) is compiled into a local executable file using clang++. The executable is run directly on user machine. Source code is hosted on GitHub for version control and sharing.
 
+This app (Node) runs on a server using Node.js. The source code is stored on GitHub for version control and sharing. The backend provides an API that handles data and logic for the app. To make the app available to users, it can be hosted on platforms like Heroku, Vercel, or any server that supports Node.js. Users access the app through their web browser, which communicates with the backend API on the hosted server.
+
+
 8. Known Issues or Limitations
--Will optimize filing style for Node.js version (Make header files and consolidate any code to make easier to read)
 -Add the other player Archetype flags + players, not just the test players in the current c++ program. Potentially tell the user about how they view the game using archetype flags.
 -Only 5 players currently, will use json for all players in Node.js
--Not an issue but will remove logs in future. Players with very high ratings may not be paired correctly if questions do not give enough chances for increments to be near when they are normalized. Also need to add cases for if user enters an invalid answer choice
+-Not an issue but will remove logs in future. Players with very high ratings may not be paired correctly if questions do not give enough chances for increments to be near when they are normalized. Also need to add cases for if user enters an invalid answer choice (C++)
+
+-Does not use archetype results to give narratives currently.(Node)
+-Does not use every question given to affect user's preferences (Node)
 
 
