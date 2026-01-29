@@ -2,7 +2,9 @@ import express from 'express';
 import { applyAnswersToPreferences } from '../logic/preferenceBuild.js';
 import { ATTRIBUTE_COUNT } from '../data/attributes.js';
 import {  QUESTIONS } from "../data/questions.js";
-import { findBestMatch } from "./match.js";
+//import { findBestMatch } from "./match.js";
+import { findTopMatches } from "./match.js";
+
 import { players } from "../data/players.js";
 
 
@@ -44,24 +46,26 @@ router.post('/submit-quiz', (req, res) => {
   
     const scaledPreferences = user.preferences.map(p => p * 100);
   
-    // Use zero-centered player attributes here
-    const matchedPlayer = findBestMatch(scaledPreferences, adjustedPlayers);
+    // Get top 3 matches
+    const topMatches = findTopMatches(scaledPreferences, adjustedPlayers, 3);
   
-    console.log("Matched player chosen:", matchedPlayer);
+    console.log("Top matches chosen:", topMatches);
   
-    if (!matchedPlayer) {
-      return res.status(500).json({ error: "No matching player found" });
+    if (!topMatches || topMatches.length === 0) {
+      return res.status(500).json({ error: "No matching players found" });
     }
   
     res.json({
       success: true,
-      player: matchedPlayer,
+      topMatches,
       preferences: user.preferences,
       archetype: user.archetype
     });
+  
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+  
   
 
 });

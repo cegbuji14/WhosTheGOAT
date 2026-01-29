@@ -28,4 +28,17 @@ export function findBestMatch(userAttr, players) {
   return bestPlayer;
 }
 
+export function findTopMatches(userAttr, players, count = 3) {
+  if (!players || players.length === 0) return [];
+
+  return players
+    .map(p => ({
+      ...p,
+      distance: distance(userAttr, p.attributes)
+    }))
+    .filter(p => !Number.isNaN(p.distance))
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, count);
+}
+
   

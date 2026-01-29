@@ -83,29 +83,44 @@ async function submitQuiz() {
     return;
   }
   
-  showResults(data.player, data.archetype);
+  showResults(data.topMatches, data.archetype);
+
 
 }
-function showResults(player, archetype) {
+
+function showResults(matches, archetype) {
   const resultsDiv = document.getElementById("results");
   const archetypeText = formatArchetype(archetype);
-
 
   quizDiv.style.display = "none";
   resultsDiv.style.display = "block";
 
+  const mainMatch = matches[0];
+
+  const others = matches
+    .slice(1)
+    .map(
+      p => `<li>${p.name}</li>`
+    )
+    .join("");
 
   resultsDiv.innerHTML = `
     <h1>Your Match</h1>
-    <h2>${player.name}</h2>
+    <h2>${mainMatch.name}</h2>
 
-    <p><strong>Archetype:</strong> ${archetypeText || "Balanced"}</p>
+    <p><strong>Archetype:</strong> ${archetypeText}</p>
+
+    <h3>Also Similar To</h3>
+    <ul>
+      ${others}
+    </ul>
 
     <button id="retakeBtn">Retake Quiz</button>
   `;
 
   document.getElementById("retakeBtn").onclick = resetQuiz;
 }
+
 
 function resetQuiz() {
   currentIndex = 0;
