@@ -5,7 +5,20 @@ This project matches users to basketball players based on their preferences and 
 ## Tech Stack
 
 - C++ for the initial implementation
-- Node.js for upcoming backend version
+- Node.js, Express.js, JavaScript
+- Fetch API
+- Vanilla HTML/CSS
+
+## Build and Run (Node.js)
+
+Run
+
+npm install
+npm start
+ 
+Open browser and go to
+http://localhost:3000
+
 
 ## Build and Run (C++)
 
