@@ -10,6 +10,7 @@ This project matches users to basketball players based on their preferences and 
 - Vanilla HTML/CSS
 
 ## Build and Run (Node.js)
+/node
 
 Run
 
@@ -21,10 +22,10 @@ http://localhost:3000
 
 
 ## Build and Run (C++)
+/cpp-version
 
 Compile all source files with:
 
-bash
 clang++ -std=c++17 main.cpp player_data.cpp match.cpp questionaire.cpp -o app
 
 ./app
