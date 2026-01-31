@@ -21,6 +21,22 @@ Open browser and go to
 http://localhost:3000
 
 
+## Running the Basketball Matcher Backend with Docker
+
+### Prerequisites
+- [Docker CLI](https://docs.docker.com/get-docker/) installed and running  
+- [Colima](https://github.com/abiosoft/colima) to run Docker locally if you’re on an older Mac without Docker Desktop, consider using 
+
+### Build  Docker Image
+
+From the backend folder (where your `Dockerfile` lives), run:
+
+Run 
+
+docker build -t basketball-backend .
+docker run --rm -it -p 3000:3000 basketball-backend
+
+
 ## Build and Run (C++)
 /cpp-version
 
