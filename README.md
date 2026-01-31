@@ -8,6 +8,7 @@ This project matches users to basketball players based on their preferences and 
 - Node.js, Express.js, JavaScript
 - Fetch API
 - Vanilla HTML/CSS
+- Docker
 
 ## Build and Run (Node.js)
 /node
